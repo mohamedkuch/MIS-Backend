@@ -13,6 +13,12 @@ const StudentSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    certificates: [{
+        certId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Certificate'
+        }
+    }]
 })
 
 module.exports = mongoose.model('Students', StudentSchema)
