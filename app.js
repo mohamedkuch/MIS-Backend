@@ -17,10 +17,14 @@ mongoose.connect(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ROUTES
+//######## ROUTES
+
+//* Students 
 const studentsRoutes = require("./routes/students");
 app.use('/students', studentsRoutes);
-
+//* Certificates
+const certificatesRoutes = require("./routes/certificates");
+app.use('/certificates', certificatesRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
