@@ -1,23 +1,27 @@
 const mongoose = require('mongoose')
 
 const StudentSchema = mongoose.Schema({
-    fullName: {
+    firstName: {
+        type: String,
+        require: true
+    },
+    lastName: {
         type: String,
         require: true
     },
     tokenBase64: {
         type: String,
         require: true,
+        unique: true 
     },
     rNumber: {
         type: String,
-        require: true
+        require: true,
+        unique: true 
     },
     certificates: [{
-        certId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Certificate'
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Certificates'
     }]
 })
 

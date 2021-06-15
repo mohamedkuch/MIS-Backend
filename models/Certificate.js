@@ -5,10 +5,6 @@ const CertificateSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    machineKey: {
-        type: String,
-        default: ""
-    },
     body: {
         type: String,
     },
@@ -18,4 +14,4 @@ const CertificateSchema = mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Certificate', CertificateSchema)
+module.exports = mongoose.model('Certificates', CertificateSchema)
