@@ -18,22 +18,33 @@ router.get('/', (req, res) => {
 
 // Get specific Student
 router.get('/:id', (req, res) => {
-    Student.findOne({"tokenBase64": req.params.id})
-    .then(result => {
-            res.status(201).json(result);
+
+    Student.findOne({ "rNumber": req.params.id })
+        .then(result => {
+            if (result)
+                return res.status(201).json(result);
+
+            return res.status(500).json({
+                result: "No student found !"
+            });
         })
         .catch(err => {
-            res.status(500).json({
-                error: err
+
+            return res.status(500).json({
+                result: "No student found !"
             });
         });
 
 })
 router.get('/:id/certificates', (req, res) => {
+    if (!req.query.token) {
+        return res.status(500).json({
+            result: "Token is missing"
+        });
+    }
 
-    Student.findOne({"tokenBase64": req.params.id})
+    Student.findOne({ "rNumber": req.params.id, "tokenBase64": req.query.token })
         .then(data => {
-
             if (data.certificates.length > 0) {
                 Certificate.find(
                     {
@@ -41,15 +52,20 @@ router.get('/:id/certificates', (req, res) => {
                             $in: data.certificates
                         }
                     }, function (err, docs) {
-                        res.status(201).json(docs);
+                        return res.status(201).json(docs);
+                    }).catch(err => {
+                        return res.status(500).json({
+                            error: err
+                        });
                     });
 
+            } else {
+                return res.status(201).json("No certificates found !")
             }
-            return res.status(201).json("No certificates Found")
         })
         .catch(err => {
-            res.status(500).json({
-                error: err
+            return res.status(500).json({
+                result: "No certificates found !"
             });
         });
 })
