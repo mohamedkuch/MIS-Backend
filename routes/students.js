@@ -52,7 +52,7 @@ router.get('/:id/certificates', (req, res) => {
                             $in: data.certificates
                         }
                     }, function (err, docs) {
-                        return res.status(201).json(docs);
+                        return res.status(200).json(docs);
                     }).catch(err => {
                         return res.status(500).json({
                             error: err
@@ -60,7 +60,7 @@ router.get('/:id/certificates', (req, res) => {
                     });
 
             } else {
-                return res.status(201).json("No certificates found !")
+                return res.status(200).json("No certificates found !")
             }
         })
         .catch(err => {

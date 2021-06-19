@@ -22,9 +22,14 @@ app.use(express.json());
 //* Students 
 const studentsRoutes = require("./routes/students");
 app.use('/students', studentsRoutes);
+
 //* Certificates
 const certificatesRoutes = require("./routes/certificates");
 app.use('/certificates', certificatesRoutes);
+
+//* Authentication
+const AuthRoutes = require("./routes/auth");
+app.use('', AuthRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
