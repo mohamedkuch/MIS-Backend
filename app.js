@@ -4,7 +4,7 @@ require('dotenv/config');
 
 ///lEtIa5uVhEBltQ9g
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 // Connect to db
 mongoose.connect(
@@ -32,7 +32,7 @@ const AuthRoutes = require("./routes/auth");
 app.use('', AuthRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening`)
 })
 
 

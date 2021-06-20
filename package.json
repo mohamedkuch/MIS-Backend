@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/mohamedkuch/MIS-Backend/issues"
   },
-  "homepage": "https://github.com/mohamedkuch/MIS-Backend#readme"
+  "homepage": "https://github.com/mohamedkuch/MIS-Backend#readme",
+  "engines": {
+    "node": ">=10.0.0"
+  }
 }
