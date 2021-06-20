@@ -11,20 +11,13 @@ router.post('/login', (req, res) => {
             fetchedUser = result;
 
             if (!fetchedUser) {
-                return res.status(401).json({
-                    result: "No student found matching this credentials"
-                });
+                return res.status(401).json("No student found matching this credentials");
             } else {
-                return res.status(200).json({
-                    message: "Login successful",
-                    data : fetchedUser
-                })
+                return res.status(200).json(result)
             }
         })
         .catch((error) => {
-            res.status(401).json({
-                message: "Auth failed"
-            });
+            res.status(401).json("Auth failed");
         });
 })
 
