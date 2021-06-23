@@ -27,12 +27,18 @@ app.use('/students', studentsRoutes);
 const certificatesRoutes = require("./routes/certificates");
 app.use('/certificates', certificatesRoutes);
 
+//* Machines
+const machinesRoutes = require("./routes/machines");
+app.use('/machines', machinesRoutes);
+
 //* Authentication
 const AuthRoutes = require("./routes/auth");
 app.use('', AuthRoutes);
 
+//######## Server launch
+
 app.listen(port, () => {
-  console.log(`Example app listening`)
+  console.log(`app is listening`)
 })
 
 

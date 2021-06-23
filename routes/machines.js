@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router();
-const Certificate = require('../models/Certificate');
+const Machine = require('../models/Machine');
 
-// Get all certificates
+// Get all machines
 router.get('/', (req, res) => {
-    Certificate.find()
+    Machine.find()
         .then(result => {
             res.status(201).json(result);
         })
@@ -16,9 +16,9 @@ router.get('/', (req, res) => {
 })
 
 
-// Get specific Certificate
+// Get specific Machine
 router.get('/:id', (req, res) => {
-    Certificate.findById(req.params.id)
+    Machine.findById(req.params.id)
         .then(result => {
             res.status(201).json(result);
         })
@@ -32,19 +32,19 @@ router.get('/:id', (req, res) => {
 
 
 
-// POST Certificate
+// POST Machine
 router.post('/', (req, res) => {
-    const certificate = new Certificate({
+    const machine = new Machine({
         name : req.body.name,
-        body : req.body.body,
-        date : req.body.date
+        certificateKey : req.body.certificateKey,
+        safetyCardURL : req.body.safetyCardURL
     });
 
-    certificate
+    Machine
         .save()
         .then(result => {
             res.status(201).json({
-                message: "Certificate created!",
+                message: "Machine created!",
                 result: result
             });
         })

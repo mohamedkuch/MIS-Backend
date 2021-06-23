@@ -8,6 +8,10 @@ const MachineSchema = mongoose.Schema({
     certificateKey: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Certificates'
+    },
+    safetyCardURL: {
+        type: String,
+        require: true
     }
 })
 
