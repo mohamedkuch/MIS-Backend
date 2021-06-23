@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
         safetyCardURL : req.body.safetyCardURL
     });
 
-    Machine
+    machine
         .save()
         .then(result => {
             res.status(201).json({
