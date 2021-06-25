@@ -37,7 +37,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const workplace = new Workplace({
         name : req.body.name,
-        machines : req.body.machinesList,
+        machines : req.body.machines,
+        workplaceNumber: req.body.workplaceNumber
     });
 
 
@@ -62,7 +63,7 @@ router.post('/', (req, res) => {
 router.post('/:workplaceId/enter/:rNumber', (req,res)=> {
     const workplaceEnter = new WorkplaceEnter({
         workplaceKey: req.params.workplaceId,
-        studentKey: req.params.rNumber
+        studentKey: req.params.rNumber,
     });
 
     workplaceEnter

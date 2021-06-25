@@ -5,6 +5,11 @@ const WorkplaceSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    workplaceNumber:  {
+        type: String,
+        require: true,
+        unique: true,
+    },
     machines: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Machines'
