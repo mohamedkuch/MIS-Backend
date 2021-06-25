@@ -6,10 +6,8 @@ const WorkplaceSchema = mongoose.Schema({
         require: true
     },
     machines: [{
-        machineId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Machines'
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Machines'
     }]
 })
 

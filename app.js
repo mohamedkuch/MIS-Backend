@@ -31,6 +31,10 @@ app.use('/certificates', certificatesRoutes);
 const machinesRoutes = require("./routes/machines");
 app.use('/machines', machinesRoutes);
 
+//* Workplaces
+const workplacesRoutes = require("./routes/workplaces");
+app.use('/workplaces', workplacesRoutes);
+
 //* Authentication
 const AuthRoutes = require("./routes/auth");
 app.use('', AuthRoutes);

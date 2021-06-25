@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const MachineUseSchema = mongoose.Schema({
-    machineKey: {
+const WorkplaceEnterSchema = mongoose.Schema({
+    workplaceKey: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Machines',
+        ref: 'Workplaces',
         require: true
     },
     studentKey: {
@@ -18,4 +18,4 @@ const MachineUseSchema = mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('MachineUse', MachineUseSchema)
+module.exports = mongoose.model('WorkplaceEnter', WorkplaceEnterSchema)
