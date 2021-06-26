@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 
 // Get specific Workplace
 router.get('/:id', (req, res) => {
-    Workplace.findById(req.params.id)
+
+    Workplace.findOne({ "workplaceNumber": req.params.id})
         .then(result => {
             res.status(201).json(result);
         })
