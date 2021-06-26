@@ -2,9 +2,10 @@ const mongoose = require('mongoose')
 
 const WorkplaceEnterSchema = mongoose.Schema({
     workplaceKey: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Workplaces',
-        require: true
+        require: true,
+        populate: { select: 'workplaceNumber' }
     },
     studentKey: {
         type: String,
