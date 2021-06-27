@@ -2,9 +2,33 @@ const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv/config');
 
-///lEtIa5uVhEBltQ9g
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+
+
 const app = express()
 const port = process.env.PORT || 3000
+
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Luca Certificate API',
+      description: 'backend documentation of the current implementation of the MIS project <Luca Certificate>',
+      contact: {
+        name: "Mohamed Kechaou"
+      },
+      servers: ["http://localhost:3000"]
+    }
+  },
+  apis: ["routes/*.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+
+
 
 // Connect to db
 mongoose.connect(

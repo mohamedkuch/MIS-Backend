@@ -6,7 +6,20 @@ const router = express.Router();
 const Workplace = require('../models/Workplace');
 const WorkplaceEnter = require('../models/WorkplaceEnter');
 
-// Get all Workplaces
+/**
+ * @swagger
+ * /workplace:
+ *   get:
+ *    summary: Get all workplaces
+ *    description: Get all workplaces
+ *      
+ *    responses:
+ *      '201':
+ *        description: Workplaces are fetched successfully
+ *      '500':
+ *        description: error fetching Workplaces
+ * 
+ */
 router.get('/', (req, res) => {
     Workplace.find()
         .then(result => {
@@ -20,7 +33,28 @@ router.get('/', (req, res) => {
 })
 
 
-// Get specific Workplace
+
+/**
+ * @swagger
+ * /workplace/{workplaceNumber}:
+ *   get:
+ *    summary: Get specific workplaces by workplaceNumber 
+ *    description: Get specific workplaces
+ *    parameters:
+ *      - name: workplaceNumber
+ *        in: request
+ *        required: true
+ *        description: workplaceNumber
+ *        schema:
+ *          type : string
+ * 
+ *    responses:
+ *      '201':
+ *        description: Workplace is fetched successfully
+ *      '500':
+ *        description: error fetching Workplace
+ * 
+ */
 router.get('/:id', (req, res) => {
 
     Workplace.findOne({ "workplaceNumber": req.params.id })
@@ -37,7 +71,44 @@ router.get('/:id', (req, res) => {
 
 
 
-// POST Workplace
+
+/**
+ * @swagger
+ * /workplace:
+ *   post:
+ *    summary: Save new workplace
+ *    description: Save new workplace
+ *    parameters:
+ *      - name: name
+ *        in: body
+ *        required: true
+ *        description: workplace name
+ *        schema:
+ *          type : string
+ * 
+ *      - name: machines
+ *        in: body
+ *        required: true
+ *        description: list of the machine's Id of the workplace
+ *        schema:
+ *          type: array
+ *          items: 
+ *            type: string
+ * 
+ *      - name: workplaceNumber
+ *        in: body
+ *        required: true
+ *        schema:
+ *          type : string
+ * 
+ * 
+ *    responses:
+ *      '201':
+ *        description: Workplace saved successfully
+ *      '500':
+ *        description: error saving Workplace
+ * 
+ */
 router.post('/', (req, res) => {
     const workplace = new Workplace({
         name: req.body.name,
@@ -63,7 +134,43 @@ router.post('/', (req, res) => {
 
 })
 
-// POST Workplace Enter 
+
+/**
+ * @swagger
+ * /workplace/{workplaceNumber}/enter/{studentNumber}?token:
+ *   post:
+ *    summary: User Enter workplace
+ *    description: User Enter workplace
+ *    parameters:
+ *      - name: workplaceKey
+ *        in: params
+ *        required: true
+ *        description: workplace Number
+ *        schema:
+ *          type : string
+ * 
+ *      - name: studentKey
+ *        in: params
+ *        required: true
+ *        description: student Number
+ *        schema:
+ *          type: string
+ * 
+ *      - name: token
+ *        in: params
+ *        required: true
+ *        description: token to identify user must be valid for the selected rNumber
+ *        schema:
+ *          type : string
+ * 
+ * 
+ *    responses:
+ *      '201':
+ *        description: Workplace entered by user successfully
+ *      '500':
+ *        description: error entering workplace
+ * 
+ */
 router.post('/:workplaceId/enter/:rNumber', (req, res) => {
 
     if (!req.query.token) {
@@ -108,7 +215,28 @@ router.post('/:workplaceId/enter/:rNumber', (req, res) => {
 
 });
 
-// Get Workplace machines
+
+/**
+ * @swagger
+ * /workplace/{workplaceNumber}/machines:
+ *   get:
+ *    summary: Get machines list from specific workplace with workplaceNumber
+ *    description: Get machines list from specific workplace with workplaceNumber
+ *    parameters:
+ *      - name: workplaceNumber
+ *        in: params
+ *        required: true
+ *        description: workplace Number
+ *        schema:
+ *          type : string
+ * 
+ *    responses:
+ *      '200':
+ *        description: machine list of the workplace fetched successfully
+ *      '500':
+ *        description: error fetching machine list of the workplace
+ * 
+ */
 router.get('/:workplaceId/machines', (req, res) => {
 
     Workplace.findOne({ "workplaceNumber": req.params.workplaceId })
