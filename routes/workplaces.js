@@ -37,8 +37,8 @@ const WorkplaceEnter = require('../models/WorkplaceEnter');
  * @swagger
  * /workplace/{workplaceNumber}:
  *   get:
- *    summary: Get specific workplaces by workplaceNumber 
- *    description: Get specific workplaces
+ *    summary: Get specific workplaces by {workplaceNumber} 
+ *    description: Get specific workplaces by {workplaceNumber} 
  *    parameters:
  *      - name: workplaceNumber
  *        in: params
@@ -75,8 +75,8 @@ router.get('/:id', (req, res) => {
  * @swagger
  * /workplace/{workplaceNumber}/machines:
  *   get:
- *    summary: Get machines list from specific workplace with workplaceNumber
- *    description: Get machines list from specific workplace with workplaceNumber
+ *    summary: Get machines list from specific workplace with {workplaceNumber}
+ *    description: Get machines list from specific workplace with {workplaceNumber}
  *    parameters:
  *      - name: workplaceNumber
  *        in: params
@@ -122,8 +122,8 @@ router.get('/:workplaceId/machines', (req, res) => {
  * @swagger
  * /workplace:
  *   post:
- *    summary: Save new workplace
- *    description: Save new workplace
+ *    summary: Create new workplace
+ *    description: Create new workplace
  *    parameters:
  *      - name: name
  *        in: body

@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
  * /certificate/{certificateId}:
  *   get:
  *    summary: Get specific certificate by certificateId 
- *    description: Get specific workplaces
+ *    description: Get specific certificate by certificateId 
  *    parameters:
  *      - name: certificateId
  *        in: params

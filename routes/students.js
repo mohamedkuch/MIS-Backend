@@ -35,8 +35,8 @@ router.get('/', (req, res) => {
  * @swagger
  * /students:
  *   post:
- *    summary: Save new student
- *    description: Save new workplace
+ *    summary: Create new student
+ *    description: Create new student
  *    parameters:
  *      - name: firstName
  *        in: body
@@ -111,8 +111,8 @@ router.get('/', (req, res) => {
  * @swagger
  * /students/{studentNumber}:
  *   get:
- *    summary: Get specific student by studentNumber 
- *    description: Get specific workplaces
+ *    summary: Get specific student by {studentNumber} 
+ *    description: Get specific student by {studentNumber} 
  *    parameters:
  *      - name: rNumber
  *        in: params
@@ -153,8 +153,8 @@ router.get('/:id', (req, res) => {
  * @swagger
  * /students/{studentNumber}/certificate?token:
  *   get:
- *    summary: Get certificate list of the student by studentNumber 
- *    description: Get certificate list of the student by studentNumber 
+ *    summary: Get certificate list of the student by {studentNumber} 
+ *    description: Get certificate list of the student by {studentNumber} 
  *    parameters:
  *      - name: rNumber
  *        in: params
