@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const Machine = require('../models/Machine');
 const router = express.Router();
 const Workplace = require('../models/Workplace');
 const WorkplaceEnter = require('../models/WorkplaceEnter');
@@ -83,5 +84,33 @@ router.post('/:workplaceId/enter/:rNumber', (req,res)=> {
 
 });
 
+// Get Workplace machines
+router.get('/:workplaceId/machines' ,(req,res) => {
+
+    Workplace.findOne({ "workplaceNumber": req.params.workplaceId})
+    .then(result => {
+        if (result.machines.length == 0){
+            res.status(201).json({
+                message: "no machines in this Workplace !",
+                result: []
+            });
+        }
+
+        Machine.find({
+            '_id': { $in: result.machines}
+        }, function(err, docs){
+            res.status(201).json({
+                message: "Workplace machines fetched successfully !",
+                result: docs
+            });
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+
+});
 
 module.exports = router;
