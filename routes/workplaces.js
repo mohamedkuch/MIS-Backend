@@ -20,7 +20,7 @@ const WorkplaceEnter = require('../models/WorkplaceEnter');
  *        description: error fetching Workplaces
  * 
  */
-router.get('/', (req, res) => {
+ router.get('/', (req, res) => {
     Workplace.find()
         .then(result => {
             res.status(201).json(result);
@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
             });
         });
 })
-
 
 
 /**
@@ -70,6 +69,53 @@ router.get('/:id', (req, res) => {
 })
 
 
+
+
+/**
+ * @swagger
+ * /workplace/{workplaceNumber}/machines:
+ *   get:
+ *    summary: Get machines list from specific workplace with workplaceNumber
+ *    description: Get machines list from specific workplace with workplaceNumber
+ *    parameters:
+ *      - name: workplaceNumber
+ *        in: params
+ *        required: true
+ *        description: workplace Number
+ *        schema:
+ *          type : string
+ * 
+ *    responses:
+ *      '200':
+ *        description: machine list of the workplace fetched successfully
+ *      '500':
+ *        description: error fetching machine list of the workplace
+ * 
+ */
+router.get('/:workplaceId/machines', (req, res) => {
+
+    Workplace.findOne({ "workplaceNumber": req.params.workplaceId })
+        .then(result => {
+            if (result.machines.length == 0) {
+                res.status(201).json({
+                    message: "no machines in this Workplace !",
+                    result: []
+                });
+            }
+
+            Machine.find({
+                '_id': { $in: result.machines }
+            }, function (err, docs) {
+                res.status(200).json(docs);
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+
+});
 
 
 /**
@@ -133,8 +179,6 @@ router.post('/', (req, res) => {
         });
 
 })
-
-
 /**
  * @swagger
  * /workplace/{workplaceNumber}/enter/{studentNumber}?token:
@@ -216,50 +260,7 @@ router.post('/:workplaceId/enter/:rNumber', (req, res) => {
 });
 
 
-/**
- * @swagger
- * /workplace/{workplaceNumber}/machines:
- *   get:
- *    summary: Get machines list from specific workplace with workplaceNumber
- *    description: Get machines list from specific workplace with workplaceNumber
- *    parameters:
- *      - name: workplaceNumber
- *        in: params
- *        required: true
- *        description: workplace Number
- *        schema:
- *          type : string
- * 
- *    responses:
- *      '200':
- *        description: machine list of the workplace fetched successfully
- *      '500':
- *        description: error fetching machine list of the workplace
- * 
- */
-router.get('/:workplaceId/machines', (req, res) => {
 
-    Workplace.findOne({ "workplaceNumber": req.params.workplaceId })
-        .then(result => {
-            if (result.machines.length == 0) {
-                res.status(201).json({
-                    message: "no machines in this Workplace !",
-                    result: []
-                });
-            }
 
-            Machine.find({
-                '_id': { $in: result.machines }
-            }, function (err, docs) {
-                res.status(200).json(docs);
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        });
-
-});
 
 module.exports = router;

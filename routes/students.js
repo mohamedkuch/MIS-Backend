@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
- * /students/:
+ * /students:
  *   post:
  *    summary: Save new student
  *    description: Save new workplace
