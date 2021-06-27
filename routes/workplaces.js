@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 // Get specific Workplace
 router.get('/:id', (req, res) => {
 
-    Workplace.findOne({ "workplaceNumber": req.params.id})
+    Workplace.findOne({ "workplaceNumber": req.params.id })
         .then(result => {
             res.status(201).json(result);
         })
@@ -38,8 +38,8 @@ router.get('/:id', (req, res) => {
 // POST Workplace
 router.post('/', (req, res) => {
     const workplace = new Workplace({
-        name : req.body.name,
-        machines : req.body.machines,
+        name: req.body.name,
+        machines: req.body.machines,
         workplaceNumber: req.body.workplaceNumber
     });
 
@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
 })
 
 // POST Workplace Enter 
-router.post('/:workplaceId/enter/:rNumber', (req,res)=> {
+router.post('/:workplaceId/enter/:rNumber', (req, res) => {
     const workplaceEnter = new WorkplaceEnter({
         workplaceKey: req.params.workplaceId,
         studentKey: req.params.rNumber,
@@ -85,31 +85,28 @@ router.post('/:workplaceId/enter/:rNumber', (req,res)=> {
 });
 
 // Get Workplace machines
-router.get('/:workplaceId/machines' ,(req,res) => {
+router.get('/:workplaceId/machines', (req, res) => {
 
-    Workplace.findOne({ "workplaceNumber": req.params.workplaceId})
-    .then(result => {
-        if (result.machines.length == 0){
-            res.status(201).json({
-                message: "no machines in this Workplace !",
-                result: []
+    Workplace.findOne({ "workplaceNumber": req.params.workplaceId })
+        .then(result => {
+            if (result.machines.length == 0) {
+                res.status(201).json({
+                    message: "no machines in this Workplace !",
+                    result: []
+                });
+            }
+
+            Machine.find({
+                '_id': { $in: result.machines }
+            }, function (err, docs) {
+                res.status(200).json(docs);
             });
-        }
-
-        Machine.find({
-            '_id': { $in: result.machines}
-        }, function(err, docs){
-            res.status(201).json({
-                message: "Workplace machines fetched successfully !",
-                result: docs
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
             });
         });
-    })
-    .catch(err => {
-        res.status(500).json({
-            error: err
-        });
-    });
 
 });
 
