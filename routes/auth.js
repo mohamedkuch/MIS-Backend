@@ -7,7 +7,7 @@ const Student = require('../models/Students');
  * @swagger
  * /login:
  *   post:
- *    summary: User Login using credentials (rNumber,Last Name)
+ *    summary: User Login using credentials
  *    description: User Login using credentials (rNumber,Last Name)
  *      
  *    parameters:

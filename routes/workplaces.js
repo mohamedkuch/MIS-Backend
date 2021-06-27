@@ -42,9 +42,9 @@ router.get('/', (req, res) => {
  *    description: Get specific workplaces
  *    parameters:
  *      - name: workplaceNumber
- *        in: request
+ *        in: params
  *        required: true
- *        description: workplaceNumber
+ *        description: workplace number
  *        schema:
  *          type : string
  * 
