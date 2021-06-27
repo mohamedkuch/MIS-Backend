@@ -1,5 +1,7 @@
 const express = require('express');
 const Machine = require('../models/Machine');
+const Student = require('../models/Students');
+
 const router = express.Router();
 const Workplace = require('../models/Workplace');
 const WorkplaceEnter = require('../models/WorkplaceEnter');
@@ -63,6 +65,28 @@ router.post('/', (req, res) => {
 
 // POST Workplace Enter 
 router.post('/:workplaceId/enter/:rNumber', (req, res) => {
+
+    if (!req.query.token) {
+        return res.status(500).json({
+            result: "Token is missing"
+        });
+    }
+
+    Student.findOne({
+        "rNumber": req.params.rNumber,
+        "tokenBase64": req.query.token,
+    }).then(data => {
+        if (data == null) {
+            res.status(500).json({
+                error: "invalid token"
+            });
+        }
+    }).catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+
     const workplaceEnter = new WorkplaceEnter({
         workplaceKey: req.params.workplaceId,
         studentKey: req.params.rNumber,
